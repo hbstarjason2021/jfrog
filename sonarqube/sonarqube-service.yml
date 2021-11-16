@@ -11,4 +11,5 @@ spec:
     targetPort: 9000
   selector:
     app: sonarqube
-  type: LoadBalancer 
+  type: NodePort
+  #type: LoadBalancer
