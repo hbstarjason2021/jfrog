@@ -22,8 +22,6 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
     install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
     kubectl version --client
 
-chmod 777 /root/ && chmod 777 /root/.kube/config
-
 ##
 MINIO_ROOT_USER=$(< /dev/urandom tr -dc a-z | head -c${1:-4})
 MINIO_ROOT_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8})
@@ -41,6 +39,8 @@ ENDPOINT=http://$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddr
 
 ## hal version list
 hal config version edit --version 1.26.6
+
+chmod 777 /root/ && chmod 777 /root/.kube/config
 
 hal config provider kubernetes enable
 hal config provider kubernetes account add my-k8s \
