@@ -37,9 +37,10 @@ docker run -it -d --rm -v ~/.minio-data/:/data --name minio-4-spinnaker -p ${MIN
 echo "
 MINIO_ROOT_USER=${MINIO_ROOT_USER}
 MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
-ENDPOINT=http://$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minio-4-spinnaker):${MINIO_PORT}
+ENDPOINT=http://$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' minio-4-spinnaker):${MINIO_PORT} "
 
-## 
+## hal version list
+hal config version edit --version 1.26.6
 
 hal config provider kubernetes enable
 hal config provider kubernetes account add my-k8s \
@@ -59,8 +60,6 @@ echo ${MINIO_ROOT_PASSWORD} | hal config storage s3 edit --endpoint $ENDPOINT \
 hal config storage edit --type s3
 hal config storage s3 edit --path-style-access=true 
 
-## hal version list
-hal config version edit --version 1.26.6
 
 hal deploy apply 
   ##hal deploy apply --no-validate
