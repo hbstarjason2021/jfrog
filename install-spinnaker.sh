@@ -60,6 +60,7 @@ echo ${MINIO_ROOT_PASSWORD} | hal config storage s3 edit --endpoint $ENDPOINT \
 hal config storage edit --type s3
 hal config storage s3 edit --path-style-access=true 
 
+  ## hal config storage edit --type redis
 
 hal deploy apply 
   ##hal deploy apply --no-validate
